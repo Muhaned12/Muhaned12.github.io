@@ -711,16 +711,33 @@
             </section>
     
             <!-- Resume Section -->
-            <section id="resume" class="pt-24 pb-20 px-4 bg-blue-50/50 section-fade-in">
-                <div class="max-w-3xl mx-auto text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-charcoal-grey mb-8">My Resume</h2>
-                    <div class="bg-white rounded-lg shadow-lg mb-8 h-96 overflow-hidden">
-                         <iframe src="./resume.pdf" class="w-full h-full" title="Muhaned's Resume"></iframe>
-                    </div>
-                    <a href="./resume.pdf" download class="btn-primary bg-muted-gold text-charcoal-grey font-bold py-3 px-8 rounded-lg shadow-lg text-lg">📄 Download Full Resume</a>
-                    <p class="mt-4 text-sm text-gray-500">Last updated: October 2025</p>
-                </div>
-            </section>
+<section id="resume" class="pt-24 pb-20 px-4 bg-blue-50/50 section-fade-in">
+    <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-charcoal-grey mb-8">My Resume</h2>
+        
+        <!-- Resume Preview (Iframe) -->
+        <div class="bg-white rounded-lg shadow-lg mb-8 h-[700px] overflow-hidden">
+            <iframe 
+                src="./resume.pdf#toolbar=0" 
+                class="w-full h-full" 
+                title="Muhaned's Resume Preview">
+            </iframe>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="flex justify-center gap-4">
+            <a href="./resume.pdf" target="_blank" class="btn-primary bg-ocean-teal text-white font-bold py-3 px-8 rounded-lg shadow-lg text-lg">
+                👁️ View Full Resume
+            </a>
+            <a href="./resume.pdf" download class="btn-primary bg-muted-gold text-charcoal-grey font-bold py-3 px-8 rounded-lg shadow-lg text-lg">
+                📄 Download Resume (PDF)
+            </a>
+        </div>
+
+        <p class="mt-4 text-sm text-gray-500">Last updated: October 2025</p>
+    </div>
+</section>
+
     
     
             <!-- Contact Section -->
