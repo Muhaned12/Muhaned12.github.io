@@ -1,0 +1,1105 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Muhaned | Cyber Security & Digital Forensics</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'misty-white': '#F9FAFC',
+                            'soft-blue': '#C9E7FF',
+                            'ocean-teal': '#6AC1B8',
+                            'sand-beige': '#F5EEDC',
+                            'charcoal-grey': '#333333',
+                            'soft-graphite': '#666666',
+                            'muted-gold': '#F0C75E',
+                        }
+                    }
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+        <style>
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family: 'Inter', sans-serif;
+            }
+    
+            .font-mono {
+                font-family: 'Space Mono', monospace;
+            }
+    
+            .gradient-bg {
+                background: linear-gradient(135deg, #F9FAFC, #C9E7FF);
+            }
+    
+            .glassmorphism {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            
+            .glowing-edge {
+                box-shadow: 0 0 20px rgba(106, 193, 184, 0.4);
+            }
+    
+            .btn-primary {
+                transition: all 0.3s ease;
+            }
+    
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 15px rgba(240, 199, 94, 0.4);
+            }
+    
+            .section-fade-in {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+    
+            .section-fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+    
+            .floating-bubble {
+                animation: float 6s ease-in-out infinite;
+            }
+    
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+                100% { transform: translateY(0px); }
+            }
+    
+            .skill-bubble:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 15px #F0C75E;
+            }
+            
+            .waving-hand {
+                animation: wave-animation 2.5s infinite;
+                transform-origin: 70% 70%;
+                display: inline-block;
+            }
+    
+            @keyframes wave-animation {
+               0% { transform: rotate( 0.0deg) }
+               10% { transform: rotate(14.0deg) }
+               20% { transform: rotate(-8.0deg) }
+               30% { transform: rotate(14.0deg) }
+               40% { transform: rotate(-4.0deg) }
+               50% { transform: rotate(10.0deg) }
+               60% { transform: rotate( 0.0deg) }
+               100% { transform: rotate( 0.0deg) }
+            }
+    
+            .footer-bg {
+                position: relative;
+                overflow: hidden;
+            }
+    
+            #constellation-canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+            }
+    
+            .loader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #F9FAFC;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                transition: opacity 0.5s ease;
+            }
+           
+            .motion-shape {
+                position: absolute;
+                border-radius: 50%;
+                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                animation: gentleFloat 20s ease-in-out infinite alternate;
+                will-change: transform;
+            }
+    
+            @keyframes gentleFloat {
+                0% {
+                    transform: translateY(20px) translateX(0px) scale(1);
+                }
+                100% {
+                    transform: translateY(-20px) translateX(20px) scale(1.1);
+                }
+            }
+    
+            .watermark-icons {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 12rem;
+                color: #eef5ff;
+                opacity: 0.5;
+                z-index: -2;
+                display: flex;
+                gap: 2rem;
+            }
+    
+            #particles-js {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+            }
+            
+            .nav-link.active {
+                color: #6AC1B8;
+                font-weight: 700;
+            }
+            
+            #lock-shackle {
+                animation: unlock-shackle 1s ease-in-out 1s forwards;
+            }
+    
+            @keyframes unlock-shackle {
+                to {
+                    transform: translateY(-15px);
+                }
+            }
+    
+            #lock-body, #initial-m-path {
+                transition: opacity 0.8s ease-in-out;
+            }
+            
+    
+        </style>
+    </head>
+    
+    <body class="bg-misty-white text-soft-graphite transition-colors duration-300">
+    
+        <!-- Preloader -->
+        <div id="loader" class="loader">
+            <div class="text-center">
+                 <svg id="secure-lock-svg" width="100" height="100" viewBox="0 -20 100 120" class="mx-auto mb-4">
+                    <g class="stroke-charcoal-grey" stroke-width="4" fill="none">
+                        <!-- Padlock Shackle -->
+                        <path id="lock-shackle" d="M 35 45 V 30 C 35 18.95 41.72 10 50 10 C 58.28 10 65 18.95 65 30 V 45" />
+                        
+                        <!-- Padlock Body -->
+                        <rect id="lock-body" x="25" y="45" width="50" height="40" rx="5" style="opacity: 1;" />
+                        
+                        <!-- M Initial Path -->
+                        <path id="initial-m-path" d="M 30 85 L 30 45 L 50 65 L 70 45 L 70 85" style="opacity: 0; stroke-dasharray: 150; stroke-dashoffset: 150;"/>
+                    </g>
+                </svg>
+                <p id="loader-status" class="font-mono text-lg text-soft-graphite transition-opacity duration-500 opacity-0"></p>
+            </div>
+        </div>
+    
+        <header class="fixed top-0 left-0 right-0 z-40 transition-shadow duration-300 glassmorphism">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Site branding -->
+                    <div class="flex-shrink-0">
+                        <a href="#home" class="font-bold text-xl text-charcoal-grey">Muhaned</a>
+                    </div>
+    
+                    <!-- Desktop navigation -->
+                    <nav class="hidden md:flex md:grow">
+                        <ul class="flex grow justify-end flex-wrap items-center">
+                            <li><a href="#about" class="nav-link font-medium text-soft-graphite hover:text-ocean-teal px-4 py-2 transition duration-150 ease-in-out">About</a></li>
+                            <li><a href="#projects" class="nav-link font-medium text-soft-graphite hover:text-ocean-teal px-4 py-2 transition duration-150 ease-in-out">Projects</a></li>
+                            <li><a href="#skills" class="nav-link font-medium text-soft-graphite hover:text-ocean-teal px-4 py-2 transition duration-150 ease-in-out">Skills</a></li>
+                            <li><a href="#certifications" class="nav-link font-medium text-soft-graphite hover:text-ocean-teal px-4 py-2 transition duration-150 ease-in-out">Certifications</a></li>
+                            <li><a href="#resume" class="nav-link font-medium text-soft-graphite hover:text-ocean-teal px-4 py-2 transition duration-150 ease-in-out">Resume</a></li>
+                            <li><a href="#contact" class="nav-link font-medium text-soft-graphite hover:text-ocean-teal px-4 py-2 transition duration-150 ease-in-out">Contact</a></li>
+                        </ul>
+                    </nav>
+    
+                    <!-- Mobile menu button -->
+                    <div class="flex md:hidden">
+                        <button id="hamburger-button" class="text-charcoal-grey hover:text-ocean-teal focus:outline-none">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                            </svg>
+                        </button>
+                    </div>
+    
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-white">
+                <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                     <li><a href="#about" class="block nav-link text-soft-graphite hover:bg-gray-100 rounded-md px-3 py-2">About</a></li>
+                     <li><a href="#projects" class="block nav-link text-soft-graphite hover:bg-gray-100 rounded-md px-3 py-2">Projects</a></li>
+                     <li><a href="#skills" class="block nav-link text-soft-graphite hover:bg-gray-100 rounded-md px-3 py-2">Skills</a></li>
+                     <li><a href="#certifications" class="block nav-link text-soft-graphite hover:bg-gray-100 rounded-md px-3 py-2">Certifications</a></li>
+                     <li><a href="#resume" class="block nav-link text-soft-graphite hover:bg-gray-100 rounded-md px-3 py-2">Resume</a></li>
+                     <li><a href="#contact" class="block nav-link text-soft-graphite hover:bg-gray-100 rounded-md px-3 py-2">Contact</a></li>
+                </ul>
+            </div>
+        </header>
+        
+        <div id="particles-js" class="absolute top-0 left-0 w-full h-full"></div>
+    
+        <main>
+            <!-- Landing Section -->
+            <section id="home" class="h-screen flex items-center justify-center text-center relative overflow-hidden gradient-bg section-fade-in">
+                <div class="z-10 p-5">
+                    <img src="./profileeeeeeeeeeeeeeeeee.jpg" alt="Muhaned" class="w-36 h-36 mx-auto rounded-full mb-6 glowing-edge object-cover">
+                    <h1 class="text-4xl md:text-6xl font-bold text-charcoal-grey mb-2"><span class="waving-hand">👋</span> Hi, I’m Muhaned.</h1>
+                    <p class="text-xl md:text-2xl text-charcoal-grey mb-4">A Cyber Security & Digital Forensics graduate passionate about securing systems and solving real-world technical challenges.</p>
+                    <p class="max-w-2xl mx-auto text-base md:text-lg text-soft-graphite mb-8">I combine analytical thinking with hands-on troubleshooting to protect, support, and optimize technology for people who rely on it.</p>
+                    <div class="flex justify-center gap-4">
+                        <a href="#projects" class="btn-primary bg-muted-gold text-charcoal-grey font-bold py-3 px-6 rounded-lg shadow-lg">View My Projects</a>
+                        <a href="./resume.pdf" download class="btn-primary bg-ocean-teal text-white font-bold py-3 px-6 rounded-lg shadow-lg">Download Resume (PDF)</a>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- About Section -->
+            <section id="about" class="pt-24 pb-20 px-4 relative section-fade-in overflow-hidden">
+                 <div class="watermark-icons" aria-hidden="true">
+                    <i class="fas fa-laptop-code"></i>
+                    <i class="fas fa-shield-halved"></i>
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-charcoal-grey mb-8">About Me</h2>
+                    <p class="text-lg text-soft-graphite mb-12 leading-relaxed">
+                    Cybersecurity and Digital Forensics graduate passionate about securing systems, solving technical challenges, and delivering trusted digital solutions. I thrive in fast-paced environments where learning, teamwork, and precision matter.
+                    </p>
+                    
+                    <div class="w-full max-w-3xl mx-auto text-left">
+                         <h3 class="text-2xl font-bold text-charcoal-grey mb-8 text-center">My Journey</h3>
+                         <div class="relative border-l-2 border-ocean-teal">
+                             
+                            <!-- Technical Support -->
+                            <div class="mb-10 ml-6">
+                               <span class="absolute flex items-center justify-center w-6 h-6 bg-ocean-teal rounded-full -left-3 ring-8 ring-white">
+                                   <i class="fas fa-briefcase text-white text-xs"></i>
+                               </span>
+                               <h4 class="text-xl font-semibold text-charcoal-grey">Technical Support (Student Learning Assistant)</h4>
+                               <p class="text-md text-soft-graphite">Middlesex University London</p>
+                               <time class="block mb-2 text-sm font-normal leading-none text-gray-500">Sep 2024 - Jun 2025</time>
+                               <ul class="list-disc list-inside text-soft-graphite mt-2 space-y-1 text-base">
+                                   <li>Provided 1st and 2nd line technical support to over 20 users.</li>
+                                   <li>Logged and progressed incidents, ensuring timely updates and resolution.</li>
+                                   <li>Maximized first-line resolutions by clearly documenting issues and solutions.</li>
+                                   <li>Escalated complex issues to 3rd line support following procedures.</li>
+                               </ul>
+                            </div>
+    
+                            <!-- BSc Hons -->
+                            <div class="mb-10 ml-6">
+                               <span class="absolute flex items-center justify-center w-6 h-6 bg-ocean-teal rounded-full -left-3 ring-8 ring-white">
+                                   <i class="fas fa-graduation-cap text-white text-xs"></i>
+                               </span>
+                               <h4 class="text-xl font-semibold text-charcoal-grey">BSc (Hons) Cybersecurity & Digital Forensics - 1st Class</h4>
+                               <p class="text-md text-soft-graphite">Middlesex University London</p>
+                               <time class="block mb-2 text-sm font-normal leading-none text-gray-500">Graduated Apr 2025</time>
+                            </div>
+    
+                            <!-- Shift Lead -->
+                            <div class="mb-10 ml-6">
+                               <span class="absolute flex items-center justify-center w-6 h-6 bg-ocean-teal rounded-full -left-3 ring-8 ring-white">
+                                   <i class="fas fa-briefcase text-white text-xs"></i>
+                               </span>
+                               <h4 class="text-xl font-semibold text-charcoal-grey">Shift Lead</h4>
+                               <p class="text-md text-soft-graphite">Burgersime, London</p>
+                               <time class="block mb-2 text-sm font-normal leading-none text-gray-500">Jun 2023 – Jan 2024</time>
+                               <ul class="list-disc list-inside text-soft-graphite mt-2 space-y-1 text-base">
+                                   <li>Supervised daily operations and trained 6 team members.</li>
+                                   <li>Improved customer satisfaction by reducing complaints by 20%.</li>
+                                   <li>Monitored inventory to cut shortages by 10%.</li>
+                               </ul>
+                            </div>
+    
+                            <!-- BTEC Level 3 -->
+                            <div class="mb-10 ml-6">
+                               <span class="absolute flex items-center justify-center w-6 h-6 bg-ocean-teal rounded-full -left-3 ring-8 ring-white">
+                                   <i class="fas fa-graduation-cap text-white text-xs"></i>
+                               </span>
+                               <h4 class="text-xl font-semibold text-charcoal-grey">BTEC Level 3 Engineering Extended Diploma - Triple Distinction</h4>
+                               <p class="text-md text-soft-graphite">Westminster Kingsway College</p>
+                               <time class="block mb-2 text-sm font-normal leading-none text-gray-500">Graduated Aug 2022</time>
+                            </div>
+                            
+                            <!-- Customer Service -->
+                            <div class="mb-10 ml-6">
+                               <span class="absolute flex items-center justify-center w-6 h-6 bg-ocean-teal rounded-full -left-3 ring-8 ring-white">
+                                   <i class="fas fa-briefcase text-white text-xs"></i>
+                               </span>
+                               <h4 class="text-xl font-semibold text-charcoal-grey">Customer Service Assistant</h4>
+                               <p class="text-md text-soft-graphite">Al-Habib Shop, London</p>
+                               <time class="block mb-2 text-sm font-normal leading-none text-gray-500">Jun 2021 – Dec 2021</time>
+                                <ul class="list-disc list-inside text-soft-graphite mt-2 space-y-1 text-base">
+                                   <li>Managed shop operations, tills, and customer interactions.</li>
+                                   <li>Assisted with stock management and delivery handling.</li>
+                               </ul>
+                            </div>
+    
+                            <!-- BTEC Level 2 -->
+                            <div class="mb-10 ml-6">
+                               <span class="absolute flex items-center justify-center w-6 h-6 bg-ocean-teal rounded-full -left-3 ring-8 ring-white">
+                                   <i class="fas fa-graduation-cap text-white text-xs"></i>
+                               </span>
+                               <h4 class="text-xl font-semibold text-charcoal-grey">BTEC Science Level 2 Diploma - Distinction, Merit, Merit</h4>
+                               <p class="text-md text-soft-graphite">Westminster Kingsway College</p>
+                               <time class="block mb-2 text-sm font-normal leading-none text-gray-500">Graduated Aug 2020</time>
+                            </div>
+                            
+                            <!-- Volunteer -->
+                            <div class="ml-6">
+                               <span class="absolute flex items-center justify-center w-6 h-6 bg-ocean-teal rounded-full -left-3 ring-8 ring-white">
+                                   <i class="fas fa-hands-helping text-white text-xs"></i>
+                               </span>
+                               <h4 class="text-xl font-semibold text-charcoal-grey">Volunteer Outreach Worker</h4>
+                               <p class="text-md text-soft-graphite">Somali Community Development Trust</p>
+                               <time class="block mb-2 text-sm font-normal leading-none text-gray-500">Jul 2019 – Mar 2020</time>
+                               <ul class="list-disc list-inside text-soft-graphite mt-2 space-y-1 text-base">
+                                   <li>Organised workshops to promote community support services.</li>
+                                   <li>Acted as a primary contact for advice and assistance.</li>
+                               </ul>
+                            </div>
+    
+                         </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Projects Section -->
+            <section id="projects" class="pt-24 pb-20 px-4 bg-blue-50/50 section-fade-in">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-charcoal-grey text-center mb-16">💡 My Research & Projects</h2>
+    
+                    <!-- Coding Projects Sub-section -->
+                    <div class="mb-16">
+                        <h3 class="text-2xl font-bold text-charcoal-grey text-left mb-8 flex items-center gap-3">
+                            <i class="fas fa-laptop-code text-ocean-teal"></i>
+                            Coding Projects
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <!-- Card 4 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">IoT Sensor Hub</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A hands-on Arduino project integrating sensors and actuators for real-time data monitoring and IoT applications.</p>
+                                    <div class="flex items-center gap-3 mb-4 text-2xl">
+                                       <i class="fas fa-microchip text-teal-600" title="Arduino/IoT"></i>
+                                       <i class="fab fa-cuttlefish text-blue-700" title="C++"></i>
+                                    </div>
+                                </div>
+                                <!-- IMPORTANT: Replace '#' with the actual URL to your GitHub project -->
+                                <a href="https://github.com/Muhaned12/IOT--Group-Project.git" target="_blank" class="mt-auto inline-block bg-ocean-teal text-white font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-ocean-teal/80 text-center">View on GitHub</a>
+                            </div>
+                            <!-- Card 5 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">Medical Appointment & Info Website</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A GDPR-compliant web app for doctors and patients, supporting appointment booking, medical notes, and secure data storage.</p>
+                                    <div class="flex items-center gap-3 mb-4 text-2xl">
+                                       <i class="fas fa-shield-alt text-blue-600" title="GDPR/Security"></i>
+                                       <i class="fab fa-react text-blue-400" title="React"></i>
+                                       <i class="fas fa-database text-green-500" title="SQL"></i>
+                                    </div>
+                                </div>
+                                <!-- IMPORTANT: Replace '#' with the actual URL to your GitHub project -->
+                                <a href="https://github.com/Muhaned12/Secure-web-GP-App.git" target="_blank" class="mt-auto inline-block bg-ocean-teal text-white font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-ocean-teal/80 text-center">View on GitHub</a>
+                            </div>
+                            <!-- Card 6 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">Cryptographic File Store</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A standalone app for securely storing and retrieving files using multiple cryptographic techniques, including AES and RSA.</p>
+                                    <div class="flex items-center gap-3 mb-4 text-2xl">
+                                       <i class="fas fa-lock text-yellow-600" title="Cryptography"></i>
+                                       <i class="fab fa-python text-blue-500" title="Python"></i>
+                                    </div>
+                                </div>
+                                <!-- IMPORTANT: Replace '#' with the actual URL to your GitHub project -->
+                                <a href="https://github.com/Muhaned12/cryptography-App.git" target="_blank" class="mt-auto inline-block bg-ocean-teal text-white font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-ocean-teal/80 text-center">View on GitHub</a>
+                            </div>
+                            <!-- Card 7 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">USB Connection Detector</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A cybersecurity app for real-time USB monitoring, forensic analysis, and threat detection for SMEs.</p>
+                                    <div class="flex items-center gap-3 mb-4 text-2xl">
+                                       <i class="fab fa-usb text-gray-700" title="USB Monitoring"></i>
+                                       <i class="fab fa-python text-blue-500" title="Python"></i>
+                                       <i class="fas fa-shield-alt text-blue-600" title="Security"></i>
+                                    </div>
+                                </div>
+                                <!-- IMPORTANT: Replace '#' with the actual URL to your GitHub project -->
+                                <a href="https://github.com/Muhaned12/usb_sentinel.git" target="_blank" class="mt-auto inline-block bg-ocean-teal text-white font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-ocean-teal/80 text-center">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Research Reports Sub-section -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-charcoal-grey text-left mb-8 flex items-center gap-3">
+                            <i class="fas fa-file-alt text-ocean-teal"></i>
+                            Research & Reports
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <!-- Report 3 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">💼 DeFi Compliance Strategy</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A strategic report proposing AML, KYC, and KYT solutions for a DeFi company to meet global blockchain compliance standards.</p>
+                                </div>
+                                <a href="./reports/defi-compliance-strategy.pdf" target="_blank" class="mt-auto inline-block bg-sand-beige text-charcoal-grey font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-sand-beige/80 text-center">View PDF</a>
+                            </div>
+                            <!-- Report 4 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">🔍 Cryptocurrency Investigation Portfolio</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A detailed blockchain forensics case study tracing crypto transactions and uncovering suspect wallet activity using analytical tools.</p>
+                                </div>
+                                <a href="./reports/crypto-investigation-portfolio.pdf" target="_blank" class="mt-auto inline-block bg-sand-beige text-charcoal-grey font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-sand-beige/80 text-center">View PDF</a>
+                            </div>
+                            <!-- Report 5 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">🛡️ ISO Standards & SME Cybersecurity Framework</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A research report analysing four ISO cybersecurity standards most relevant to SMEs and developing simplified in-house security regulations.</p>
+                                </div>
+                                <a href="./reports/iso-sme-framework.pdf" target="_blank" class="mt-auto inline-block bg-sand-beige text-charcoal-grey font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-sand-beige/80 text-center">View PDF</a>
+                            </div>
+                            <!-- Report 6 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">🏠 Smart Home Consulting Report</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A group project designing a secure smart home solution, addressing technical, ethical, and regulatory aspects.</p>
+                                </div>
+                                <a href="./reports/smart-home-consulting.pdf" target="_blank" class="mt-auto inline-block bg-sand-beige text-charcoal-grey font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-sand-beige/80 text-center">View PDF</a>
+                            </div>
+                            <!-- Report 7 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">📡 Wireless Network Penetration Testing</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A group project investigating WPA vulnerabilities using Kali Linux, simulating penetration tests, and proposing defence mechanisms.</p>
+                                </div>
+                                <a href="./reports/wireless-pen-testing-report.pdf" target="_blank" class="mt-auto inline-block bg-sand-beige text-charcoal-grey font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-sand-beige/80 text-center">View PDF</a>
+                            </div>
+                            <!-- Report 8 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">💽 Disk Acquisition and Analysis</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A forensics project acquiring and analysing a USB drive using FTK Imager, covering imaging best practices and data structure analysis.</p>
+                                </div>
+                                <a href="./reports/disk-acquisition-analysis.pdf" target="_blank" class="mt-auto inline-block bg-sand-beige text-charcoal-grey font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-sand-beige/80 text-center">View PDF</a>
+                            </div>
+                            <!-- Report 9 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">🕵️‍♂️ Digital Incident Scene Investigation</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A group investigation simulating a corporate data breach, including evidence acquisition, analysis, and a full forensic report.</p>
+                                </div>
+                                <a href="./reports/incident-scene-investigation.pdf" target="_blank" class="mt-auto inline-block bg-sand-beige text-charcoal-grey font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-sand-beige/80 text-center">View PDF</a>
+                            </div>
+                            <!-- Report 10 -->
+                            <div class="project-card flex flex-col justify-between rounded-xl p-6 glassmorphism transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl h-full">
+                                <div>
+                                    <h4 class="text-xl font-bold text-charcoal-grey mb-2">🖥️ Windows Memory Analysis</h4>
+                                    <p class="text-soft-graphite mb-4 text-sm leading-relaxed">A group project analysing an infected Windows memory dump to detect malware and reconstruct system events for forensic conclusions.</p>
+                                </div>
+                                <a href="./reports/windows-memory-analysis.pdf" target="_blank" class="mt-auto inline-block bg-sand-beige text-charcoal-grey font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-sand-beige/80 text-center">View PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Skills Section -->
+            <section id="skills" class="pt-24 pb-20 px-4 section-fade-in">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-charcoal-grey text-center mb-16">My Skills</h2>
+                    <div class="space-y-16">
+    
+                        <!-- Programming & Development -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-charcoal-grey mb-8 text-center flex items-center justify-center gap-3">
+                                <i class="fas fa-code text-ocean-teal"></i>
+                                Programming & Development
+                            </h3>
+                            <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fab fa-python text-5xl text-blue-500 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Python</p>
+                                </div>
+                                 <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-file-code text-5xl text-blue-700 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">C & C++</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fab fa-js-square text-5xl text-yellow-500 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">JavaScript</p>
+                                </div>
+                                 <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="text-5xl text-blue-600 mb-2 font-bold">TS</i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">TypeScript</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fab fa-react text-5xl text-cyan-400 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">React</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fab fa-node-js text-5xl text-green-500 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Node.js</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Web & Database Technologies -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-charcoal-grey mb-8 text-center flex items-center justify-center gap-3">
+                                <i class="fas fa-database text-ocean-teal"></i>
+                                Web & Database Technologies
+                            </h3>
+                            <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+                                 <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fab fa-html5 text-5xl text-orange-600 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">HTML5</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fab fa-css3-alt text-5xl text-blue-600 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">CSS3</p>
+                                </div>
+                                 <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-database text-5xl text-indigo-500 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">SQL/NoSQL</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-network-wired text-5xl text-gray-600 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">REST/GraphQL</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Cybersecurity & Digital Forensics -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-charcoal-grey mb-8 text-center flex items-center justify-center gap-3">
+                                <i class="fas fa-shield-alt text-ocean-teal"></i>
+                                Cybersecurity & Forensics
+                            </h3>
+                             <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-shield-alt text-5xl text-green-600 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Security</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-search-plus text-5xl text-blue-500 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">FTK Imager</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-user-secret text-5xl text-red-600 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Ethical Hacking</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-project-diagram text-5xl text-teal-500 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Networking</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Systems & DevOps -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-charcoal-grey mb-8 text-center flex items-center justify-center gap-3">
+                                <i class="fas fa-cogs text-ocean-teal"></i>
+                                Systems & DevOps
+                            </h3>
+                            <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fab fa-linux text-5xl text-gray-800 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Linux</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fab fa-windows text-5xl text-blue-500 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Windows</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fab fa-docker text-5xl text-blue-400 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Docker</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-desktop text-5xl text-gray-700 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Virtualization</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-cloud text-5xl text-blue-300 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Cloud</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- IoT & Embedded Systems -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-charcoal-grey mb-8 text-center flex items-center justify-center gap-3">
+                                <i class="fas fa-microchip text-ocean-teal"></i>
+                                IoT & Embedded Systems
+                            </h3>
+                            <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-microchip text-5xl text-teal-600 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Arduino</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-satellite-dish text-5xl text-indigo-400 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">Sensors</p>
+                                </div>
+                                <div class="skill-bubble text-center w-32 flex flex-col items-center p-4 rounded-full bg-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl">
+                                    <i class="fas fa-wifi text-5xl text-blue-500 mb-2"></i>
+                                    <p class="text-sm font-medium text-soft-graphite mt-1">IoT Protocols</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Certifications Section -->
+            <section id="certifications" class="pt-24 pb-20 px-4 section-fade-in bg-blue-50/50">
+                <div class="max-w-5xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-charcoal-grey mb-16">My Certifications</h2>
+                    <div class="flex flex-wrap justify-center items-center gap-8">
+                        <!-- Certification Card 1: CompTIA -->
+                        <div class="floating-bubble bg-white p-6 rounded-lg shadow-lg transition-transform duration-300 w-64 h-52 hover:scale-105 hover:shadow-xl flex flex-col justify-center items-center">
+                            <img src="./assets/comptia-logo.png" alt="CompTIA Security+ Logo" class="h-20 w-20 object-contain mb-3">
+                            <h3 class="font-semibold text-lg text-charcoal-grey">CompTIA Security+</h3>
+                            <p class="text-sm text-soft-graphite mt-1">Achieved: June 2025</p>
+                        </div>
+                         <!-- Certification Card 2: BTEC -->
+                        <div class="floating-bubble bg-white p-6 rounded-lg shadow-lg transition-transform duration-300 w-64 h-52 hover:scale-105 hover:shadow-xl flex flex-col justify-center items-center" style="animation-delay: 0.5s;">
+                            <img src="./assets/btec-logo.png" alt="Pearson BTEC Logo" class="h-16 object-contain mb-3">
+                            <h3 class="font-semibold text-lg text-charcoal-grey mt-2">Level 1 BTEC in Customer Service</h3>
+                            <p class="text-sm text-soft-graphite mt-1">Achieved: May 2023</p>
+                        </div>
+                         <!-- Certification Card 3: NCS -->
+                        <div class="floating-bubble bg-white p-6 rounded-lg shadow-lg transition-transform duration-300 w-64 h-52 hover:scale-105 hover:shadow-xl flex flex-col justify-center items-center" style="animation-delay: 1s;">
+                            <img src="./assets/ncs-logo.png" alt="NCS Logo" class="h-16 object-contain mb-3">
+                            <h3 class="font-semibold text-lg text-charcoal-grey mt-2">National Citizen Service Trust</h3>
+                            <p class="text-sm text-soft-graphite mt-1">Achieved: June 2018</p>
+                        </div>
+                        <!-- Certification Card 4: Student Learning Assistant -->
+                        <div class="floating-bubble bg-white p-6 rounded-lg shadow-lg transition-transform duration-300 w-64 h-52 hover:scale-105 hover:shadow-xl flex flex-col justify-center items-center" style="animation-delay: 1.5s;">
+                             <img src="./assets/middlesex-logo.png" alt="Middlesex University Logo" class="h-16 w-auto object-contain mb-3">
+                            <h3 class="font-semibold text-lg text-charcoal-grey leading-tight">Certificate of Achievement – Student Learning Assistants</h3>
+                            <p class="text-sm text-soft-graphite mt-1">Issued: Apr 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Resume Section -->
+            <section id="resume" class="pt-24 pb-20 px-4 bg-blue-50/50 section-fade-in">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-charcoal-grey mb-8">My Resume</h2>
+                    <div class="bg-white rounded-lg shadow-lg mb-8 h-96 overflow-hidden">
+                         <iframe src="./resume.pdf" class="w-full h-full" title="Muhaned's Resume"></iframe>
+                    </div>
+                    <a href="./resume.pdf" download class="btn-primary bg-muted-gold text-charcoal-grey font-bold py-3 px-8 rounded-lg shadow-lg text-lg">📄 Download Full Resume</a>
+                    <p class="mt-4 text-sm text-gray-500">Last updated: October 2025</p>
+                </div>
+            </section>
+    
+    
+            <!-- Contact Section -->
+            <section id="contact" class="pt-24 pb-20 px-4 section-fade-in">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-charcoal-grey mb-4">Let's Connect!</h2>
+                    <p class="text-lg text-soft-graphite mb-8">Whether you have a project, a role, or just want to say hello — I’d love to hear from you.</p>
+                    <form id="contact-form" action="https://formspree.io/f/xeorzkky" method="POST" class="space-y-6">
+                        <input type="text" name="name" placeholder="Your Name" class="w-full p-4 rounded-lg bg-gray-100 border-2 border-transparent focus:border-ocean-teal outline-none transition-colors" required>
+                        <input type="email" name="email" placeholder="Your Email" class="w-full p-4 rounded-lg bg-gray-100 border-2 border-transparent focus:border-ocean-teal outline-none transition-colors" required>
+                        <textarea name="message" placeholder="Your Message" rows="5" class="w-full p-4 rounded-lg bg-gray-100 border-2 border-transparent focus:border-ocean-teal outline-none transition-colors" required></textarea>
+                        <button type="submit" class="btn-primary bg-muted-gold text-charcoal-grey font-bold py-3 px-8 rounded-lg shadow-lg text-lg w-full">Send Message</button>
+                    </form>
+                    <p id="form-status" class="mt-4 text-lg"></p>
+                    <div class="flex justify-center gap-6 mt-8 text-3xl">
+                        <a href="https://www.linkedin.com/in/muhaned-nouman-5707b2234" target="_blank" class="text-soft-graphite hover:text-ocean-teal transition-colors"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Muhaned12" target="_blank" class="text-soft-graphite hover:text-ocean-teal transition-colors"><i class="fab fa-github"></i></a>
+                        <a href="mailto:muhaned.nouman@outlook.com" class="text-soft-graphite hover:text-ocean-teal transition-colors"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    
+        <!-- Footer -->
+        <footer class="py-10 text-center text-soft-graphite footer-bg bg-blue-50/30">
+            <canvas id="constellation-canvas"></canvas>
+            <div class="relative z-10">
+                <p>© 2025 Muhaned | Built with ❤️ and creativity.</p>
+            </div>
+        </footer>
+        
+        <!-- Scroll to Top Button -->
+        <button id="to-top-button" title="Go To Top" class="hidden fixed z-50 bottom-10 right-10 p-4 border-0 w-14 h-14 rounded-full shadow-md bg-muted-gold/80 hover:bg-muted-gold text-white text-lg font-semibold transition-all duration-300">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <!-- Scripts -->
+        <script>
+            // --- PRELOADER ---
+            window.addEventListener('load', () => {
+                const loader = document.getElementById('loader');
+                const statusText = document.getElementById('loader-status');
+                const lockBody = document.getElementById('lock-body');
+                const initialM = document.getElementById('initial-m-path');
+    
+                const statusMessages = [
+                    "Securing access...",
+                    "Authenticating...",
+                    "Welcome."
+                ];
+                let statusIndex = 0;
+    
+                // Start status messages
+                setTimeout(() => {
+                    if (statusText) {
+                        statusText.textContent = statusMessages[statusIndex];
+                        statusText.style.opacity = '1';
+    
+                        let statusInterval = setInterval(() => {
+                            statusIndex++;
+                            if (statusIndex >= statusMessages.length) {
+                                clearInterval(statusInterval);
+                                return;
+                            }
+                            statusText.style.opacity = '0';
+                            setTimeout(() => {
+                                statusText.textContent = statusMessages[statusIndex];
+                                statusText.style.opacity = '1';
+                            }, 500);
+                        }, 1500);
+                    }
+                }, 500);
+    
+                // After unlock, transform lock to initial
+                setTimeout(() => {
+                    if(lockBody) lockBody.style.opacity = '0';
+                    if(initialM) {
+                        initialM.style.opacity = '1';
+                        initialM.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
+                        initialM.style.strokeDashoffset = '0';
+                    }
+                }, 2100);
+    
+    
+                // Fade out loader
+                setTimeout(() => {
+                    if(loader) {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                            const firstSection = document.querySelector('.section-fade-in');
+                            if(firstSection) firstSection.classList.add('visible');
+                        }, 500);
+                    }
+                }, 5000);
+    
+                initAboutMeMotion();
+                initConstellationFooter();
+                handleContactForm();
+                handleNavigation();
+            });
+    
+    
+            // --- FADE-IN SECTIONS ON SCROLL ---
+            const sections = document.querySelectorAll('.section-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+    
+    
+            // --- SCROLL TO TOP BUTTON ---
+            var toTopButton = document.getElementById("to-top-button");
+            window.onscroll = function () {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    toTopButton.classList.remove("hidden");
+                } else {
+                    toTopButton.classList.add("hidden");
+                }
+            };
+    
+            toTopButton.onclick = function (e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            };
+            
+            // --- INTERACTIVE ABOUT ME MOTION ---
+            function initAboutMeMotion() {
+                const aboutSection = document.getElementById('about');
+                if(!aboutSection) return;
+                const motionContainer = document.createElement('div');
+                motionContainer.className = 'absolute top-0 left-0 w-full h-full -z-10';
+                aboutSection.prepend(motionContainer);
+    
+                const shapes = [];
+                const colors = ['#6AC1B8', '#F0C75E', '#C9E7FF'];
+                const numShapes = 15;
+    
+                for (let i = 0; i < numShapes; i++) {
+                    const shape = document.createElement('div');
+                    shape.classList.add('motion-shape');
+                    const size = Math.random() * 40 + 10;
+                    shape.style.width = `${size}px`;
+                    shape.style.height = `${size}px`;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    shape.style.backgroundColor = color;
+                    shape.style.opacity = Math.random() * 0.4 + 0.15;
+                    shape.style.top = `${Math.random() * 100}%`;
+                    shape.style.left = `${Math.random() * 100}%`;
+                    shape.style.animationDelay = `${Math.random() * -20}s`;
+                    shape.style.animationDuration = `${Math.random() * 15 + 15}s`;
+                    shape.dataset.depth = Math.random() * 0.6 + 0.2;
+    
+                    motionContainer.appendChild(shape);
+                    shapes.push(shape);
+                }
+    
+                aboutSection.addEventListener('mousemove', (e) => {
+                    const rect = aboutSection.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+                    const centerX = aboutSection.offsetWidth / 2;
+                    const centerY = aboutSection.offsetHeight / 2;
+    
+                    shapes.forEach(shape => {
+                        const depth = parseFloat(shape.dataset.depth);
+                        const moveX = (mouseX - centerX) * depth / 15;
+                        const moveY = (mouseY - centerY) * depth / 15;
+                        shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                    });
+                });
+    
+                aboutSection.addEventListener('mouseleave', () => {
+                    shapes.forEach(shape => {
+                        shape.style.transform = ''; // Let CSS animation take over again
+                    });
+                });
+            }
+    
+    
+            // --- FOOTER CONSTELLATION ---
+            function initConstellationFooter() {
+                const canvas = document.getElementById('constellation-canvas');
+                if(!canvas) return;
+                const footer = canvas.parentElement;
+                const ctx = canvas.getContext('2d');
+                let particlesArray;
+                let animationFrameId;
+    
+                let theme = 'light';
+                const colors = {
+                    light: { dot: 'rgba(106, 193, 184, 0.8)', line: 'rgba(106, 193, 184, 0.3)' }
+                };
+    
+                function setCanvasSize() {
+                    canvas.width = footer.offsetWidth;
+                    canvas.height = footer.offsetHeight;
+                }
+    
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.size = Math.random() * 2 + 0.5;
+                        this.speedX = (Math.random() - 0.5) * 0.3;
+                        this.speedY = (Math.random() - 0.5) * 0.3;
+                    }
+                    update() {
+                        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                        this.x += this.speedX;
+                        this.y += this.speedY;
+                    }
+                    draw() {
+                        ctx.fillStyle = colors[theme].dot;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+    
+                function init() {
+                    particlesArray = [];
+                    let numberOfParticles = (canvas.width * canvas.height) / 12000;
+                    if (numberOfParticles < 20) numberOfParticles = 20;
+                    if (numberOfParticles > 100) numberOfParticles = 100;
+                    for (let i = 0; i < Math.floor(numberOfParticles); i++) {
+                        particlesArray.push(new Particle());
+                    }
+                }
+    
+                function connect() {
+                    let opacityValue = 1;
+                    for (let a = 0; a < particlesArray.length; a++) {
+                        for (let b = a; b < particlesArray.length; b++) {
+                            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                                           ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                            
+                            let connectDistance = 120;
+                            if (distance < connectDistance * connectDistance) {
+                                opacityValue = 1 - (distance / (connectDistance * connectDistance));
+                                ctx.strokeStyle = colors[theme].line.replace('0.3)', `${opacityValue > 0 ? opacityValue : 0})`);
+                                ctx.lineWidth = 1;
+                                ctx.beginPath();
+                                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+    
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    for (let i = 0; i < particlesArray.length; i++) {
+                        particlesArray[i].update();
+                        particlesArray[i].draw();
+                    }
+                    connect();
+                    animationFrameId = requestAnimationFrame(animate);
+                }
+    
+                function startAnimation() {
+                    setCanvasSize();
+                    init();
+                    if(animationFrameId) cancelAnimationFrame(animationFrameId);
+                    animate();
+                }
+                startAnimation();
+    
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(startAnimation, 500);
+                });
+            }
+    
+    
+            // --- CONTACT FORM HANDLING ---
+            function handleContactForm() {
+                const form = document.getElementById('contact-form');
+                const status = document.getElementById('form-status');
+                
+                if (!form) return;
+    
+                async function handleSubmit(event) {
+                    event.preventDefault();
+                    const data = new FormData(event.target);
+                    
+                    status.textContent = 'Sending...';
+                    status.classList.remove('text-green-500', 'text-red-500');
+                    status.classList.add('text-soft-graphite');
+    
+    
+                    fetch(event.target.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            status.textContent = "Message sent successfully!";
+                            status.classList.add('text-green-500');
+                            form.reset();
+                        } else {
+                            response.json().then(data => {
+                                if (Object.hasOwn(data, 'errors')) {
+                                    status.textContent = data["errors"].map(error => error["message"]).join(", ");
+                                } else {
+                                    status.textContent = "Oops! There was a problem submitting your form";
+                                }
+                                status.classList.add('text-red-500');
+                            })
+                        }
+                    }).catch(error => {
+                        status.textContent = "Oops! There was a problem submitting your form";
+                        status.classList.add('text-red-500');
+                    });
+                }
+    
+                form.addEventListener("submit", handleSubmit);
+            }
+    
+            // --- NAVIGATION HANDLING ---
+            function handleNavigation() {
+                // Mobile menu toggle
+                const hamburgerButton = document.getElementById('hamburger-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                hamburgerButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+    
+                // Close mobile menu on link click
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+                
+                // Active link highlighting on scroll
+                const navLinks = document.querySelectorAll('.nav-link');
+                const sections = document.querySelectorAll('main section');
+                
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '-50% 0px -50% 0px',
+                    threshold: 0
+                };
+    
+                const sectionObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.getAttribute('id');
+                            navLinks.forEach(link => {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === `#${id}`) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }, observerOptions);
+    
+                sections.forEach(section => {
+                    sectionObserver.observe(section);
+                });
+            }
+    
+    
+        </script>
+    </body>
+    </html>
+    
+    
